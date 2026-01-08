@@ -1,0 +1,7 @@
+{
+  "name": "suaenergiabrasil-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
