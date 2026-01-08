@@ -1,8 +1,8 @@
 {
   "name": "Sua Energia Brasil",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Thiago Prazeres",
+  "homepage": "https://www.linkedin.com/in/thbezerra/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^21.0.7",
     "@angular/platform-browser-dynamic": "^21.0.7",
     "@angular/router": "^21.0.7",
+    "@angular/service-worker": "^21.0.7",
     "@capacitor/app": "8.0.0",
     "@capacitor/core": "8.0.0",
     "@capacitor/haptics": "8.0.0",
