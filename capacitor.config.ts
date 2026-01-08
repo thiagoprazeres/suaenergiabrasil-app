@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'suaenergiabrasil-app',
+  appId: 'br.com.suaenergiabrasil',
+  appName: 'Sua Energia Brasil',
   webDir: 'www'
 };
 
