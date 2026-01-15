@@ -12,3 +12,27 @@
   margin: 0 0 8px;
   font-size: 16px;
 }
+
+.distributor-details {
+  .detail-item {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    strong {
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  svg {
+    flex-shrink: 0;
+    color: var(--ion-color-success);
+  }
+}

@@ -14,7 +14,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { PlansService } from '../../core/services/plans.service';
+import { DistributorsService } from '../../core/services/distributors.service';
 
 @Component({
   selector: 'app-plans',
@@ -27,26 +27,21 @@ import { PlansService } from '../../core/services/plans.service';
     IonTitle,
     IonContent,
     IonCard,
-    IonCardHeader,
-    IonCardTitle,
     IonCardContent,
-    IonList,
-    IonItem,
-    IonLabel,
     IonButton,
   ],
 })
 export class PlansPage {
-  private readonly plansService = inject(PlansService);
+  private readonly distributorsService = inject(DistributorsService);
   private readonly router = inject(Router);
 
-  private readonly plans = signal(this.plansService.getPlans());
+  private readonly distributors = signal(this.distributorsService.getDistributors());
 
   readonly viewModel = computed(() => ({
-    plans: this.plans(),
+    distributors: this.distributors(),
   }));
 
-  openPlan(id: string): void {
+  openDistributor(id: string): void {
     void this.router.navigate(['/plans', id]);
   }
 }

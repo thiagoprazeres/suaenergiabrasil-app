@@ -13,7 +13,7 @@ import {
   IonLabel,
   IonTitle,
   IonToolbar, IonListHeader } from '@ionic/angular/standalone';
-import { PlansService } from '../../core/services/plans.service';
+import { DistributorsService } from '../../core/services/distributors.service';
 
 @Component({
   selector: 'app-plan-details',
@@ -38,13 +38,13 @@ import { PlansService } from '../../core/services/plans.service';
 export class PlanDetailsPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly plansService = inject(PlansService);
+  private readonly distributorsService = inject(DistributorsService);
 
   private readonly id = computed(() => this.route.snapshot.paramMap.get('id'));
 
-  readonly plan = computed(() => {
+  readonly distributor = computed(() => {
     const id = this.id();
-    return id ? this.plansService.getPlanById(id) : null;
+    return id ? this.distributorsService.getDistributorById(id) : null;
   });
 
   goToSignUp(): void {

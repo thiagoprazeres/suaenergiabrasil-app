@@ -3,16 +3,16 @@
     <ion-title
       ><img
         src="https://suaenergiabrasil.com.br/assets/img/logomarca03.png"
-        alt="Sua Energia Brasil - Detalhes do plano"
+        alt="Sua Energia Brasil - Detalhes da distribuidora"
     /></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  @if (plan() === null) {
+  @if (distributor() === null) {
   <ion-card>
     <ion-card-content>
-      <p>Plano não encontrado.</p>
+      <p>Distribuidora não encontrada.</p>
       <ion-button (click)="back()" expand="block" fill="outline"
         >Voltar</ion-button
       >
@@ -20,28 +20,67 @@
   </ion-card>
   } @else {
   <div class="ion-padding">
-    <h1>Detalhes do plano</h1>
-    <h2>{{ plan()!.name }}</h2>
-    <p class="desc">{{ plan()!.description }}</p>
+    <h1>Detalhes da distribuidora</h1>
+    <h2>{{ distributor()!.name }}</h2>
+    <p class="desc">Até {{ distributor()!.discountPercentage }}% de desconto na sua conta de energia</p>
     <p class="range">
-      Economia estimada: R$ {{ plan()!.estimatedMonthlySavingsMin }}–R$ {{
-      plan()!.estimatedMonthlySavingsMax }}/mês
+      Economize em média: R$ {{ distributor()!.averageAnnualSavings.toFixed(2).replace('.', ',') }} / ano
     </p>
     <h2 class="section"></h2>
   </div>
+  
+  <ion-card class="ion-margin">
+    <ion-card-header>
+      <ion-card-title>Informações da distribuidora</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="distributor-details">
+        <div class="detail-item">
+          <strong>Desconto:</strong> Até {{ distributor()!.discountPercentage }}%
+        </div>
+        <div class="detail-item">
+          <strong>Número de faturas:</strong> {{ distributor()!.billingCount }}
+        </div>
+        <div class="detail-item">
+          <strong>Início da economia:</strong> {{ distributor()!.economyStartDays }}
+        </div>
+        <div class="detail-item">
+          <strong>Cancelamento:</strong> {{ distributor()!.cancellationDays }} dias
+        </div>
+        <div class="detail-item">
+          <strong>Fidelidade:</strong> 
+          @if (distributor()!.hasFidelity) {
+            {{ distributor()!.fidelityPeriod }}
+          } @else {
+            Sem fidelidade
+          }
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
   <ion-list>
     <ion-list-header>
-      <ion-label>Destaques</ion-label>
+      <ion-label>Benefícios</ion-label>
     </ion-list-header>
-    @for (h of plan()!.highlights; track h) {
+    @for (benefit of distributor()!.benefits; track benefit) {
     <ion-item>
-      <ion-label>{{ h }}</ion-label>
+      <ion-label>
+        <div class="benefit-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="18" height="18">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+          </svg>
+          {{ benefit }}
+        </div>
+      </ion-label>
     </ion-item>
     }
   </ion-list>
 
   <div class="ion-padding">
-    <ion-button (click)="goToSignUp()">Continuar para cadastro</ion-button>
+    <ion-button (click)="goToSignUp()" expand="block">
+      Continuar para cadastro
+    </ion-button>
   </div>
   }
 </ion-content>
