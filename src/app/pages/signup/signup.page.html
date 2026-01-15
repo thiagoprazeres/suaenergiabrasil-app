@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      ><img
+        src="https://suaenergiabrasil.com.br/assets/img/logomarca03.png"
+        alt="Sua Energia Brasil - Cadastro"
+    /></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <h1>Cadastro</h1>
+    <h2>Finalize em poucos passos</h2>
+  </div>
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input autocomplete="name" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input
+          autocomplete="email"
+          inputmode="email"
+          formControlName="email"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button type="submit" expand="block">Criar conta</ion-button>
+    </div>
+  </form>
+</ion-content>

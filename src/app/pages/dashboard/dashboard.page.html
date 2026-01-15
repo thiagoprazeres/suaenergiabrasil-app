@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ greeting() }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="sub">Seu marketplace de energia renovável está pronto para evoluir.</p>
+
+      <ion-button routerLink="/support" expand="block" fill="outline">Falar com suporte</ion-button>
+      <ion-button (click)="logout()" expand="block" color="medium">Sair</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

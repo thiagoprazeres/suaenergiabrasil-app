@@ -1,0 +1,27 @@
+.onboarding-swiper {
+  height: 100%;
+}
+
+swiper-slide {
+  background-size: cover;
+  background-position: center;
+  align-content: center;
+  justify-items: center;
+  text-align: left;
+  color: #fff;
+  padding-left: 24px;
+  padding-right: 96px;
+}
+
+:host ::ng-deep .swiper-pagination {
+  bottom: 18px;
+}
+
+:host ::ng-deep .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 1;
+}
+
+:host ::ng-deep .swiper-pagination-bullet-active {
+  background: #fff;
+}

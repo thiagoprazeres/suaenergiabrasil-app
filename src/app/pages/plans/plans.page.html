@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      ><img
+        src="https://suaenergiabrasil.com.br/assets/img/logomarca03.png"
+        alt="Sua Energia Brasil - Planos"
+    /></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <h1>Planos</h1>
+    <h2>Energia limpa com economia</h2>
+    <p class="subtitle">Escolha um plano e avance para a contratação.</p>
+  </div>
+  <ion-list>
+    @for (plan of viewModel().plans; track plan.id) {
+    <ion-item>
+      <ion-label>
+        <h2>{{ plan.name }}</h2>
+        <p>{{ plan.description }}</p>
+        <p class="range">
+          Economia estimada: R$ {{ plan.estimatedMonthlySavingsMin }}–R$ {{
+          plan.estimatedMonthlySavingsMax }}/mês
+        </p>
+      </ion-label>
+      <ion-button slot="end" (click)="openPlan(plan.id)"
+        >Ver detalhes</ion-button
+      >
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

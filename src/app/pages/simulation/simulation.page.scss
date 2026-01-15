@@ -1,0 +1,29 @@
+ion-header {
+  
+}
+
+h1 {
+  font-weight: 700;
+  color: var(--ion-color-primary);
+}
+
+.subtitle {
+  color: var(--ion-color-secondary);
+  font-weight: 500;
+}
+
+.result-lead {
+  margin: 0;
+  color: var(--ion-color-medium);
+}
+
+.result-money {
+  margin: 8px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.result-sub {
+  margin: 4px 0 12px;
+  color: var(--ion-color-medium);
+}

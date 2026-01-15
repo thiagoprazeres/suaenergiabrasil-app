@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      ><img
+        src="https://suaenergiabrasil.com.br/assets/img/logomarca03.png"
+        alt="Logo Sua Energia Brasil"
+    /></ion-title>
+    <ion-buttons slot="end">
+      @if (activeIndex() < steps().length - 1) {
+      <ion-button (click)="goToSimulation()" fill="clear">Pular</ion-button>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <swiper-container
+    class="onboarding-swiper"
+    [pagination]="{ clickable: true }"
+    [keyboard]="{ enabled: true }"
+    [a11y]="{ enabled: true }"
+    (swiperslidechange)="onSlideChange($event)"
+  >
+    @for (s of steps(); track s.title) {
+    <swiper-slide [style.backgroundImage]="'url(' + s.backgroundImageUrl + ')'">
+      <h1>{{ s.title }}</h1>
+      <p>{{ s.body }}</p>
+      @if (s.title === 'Simples, seguro e digital') {
+      <ion-button class="ion-no-margin" color="tertiary" (click)="goToSignup()" style="margin-bottom: 16px;"
+        >Cadastrar minha usina</ion-button
+      >
+      <ion-button class="ion-no-margin" (click)="goToSimulation()"
+        >Simular minha economia</ion-button
+      >
+      }
+    </swiper-slide>
+    }
+  </swiper-container>
+</ion-content>
+
+<ion-footer>
+  <ion-progress-bar [value]="progress()"></ion-progress-bar>
+</ion-footer>

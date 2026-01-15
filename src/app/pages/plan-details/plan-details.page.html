@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      ><img
+        src="https://suaenergiabrasil.com.br/assets/img/logomarca03.png"
+        alt="Sua Energia Brasil - Detalhes do plano"
+    /></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (plan() === null) {
+  <ion-card>
+    <ion-card-content>
+      <p>Plano não encontrado.</p>
+      <ion-button (click)="back()" expand="block" fill="outline"
+        >Voltar</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+  } @else {
+  <div class="ion-padding">
+    <h1>Detalhes do plano</h1>
+    <h2>{{ plan()!.name }}</h2>
+    <p class="desc">{{ plan()!.description }}</p>
+    <p class="range">
+      Economia estimada: R$ {{ plan()!.estimatedMonthlySavingsMin }}–R$ {{
+      plan()!.estimatedMonthlySavingsMax }}/mês
+    </p>
+    <h2 class="section"></h2>
+  </div>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Destaques</ion-label>
+    </ion-list-header>
+    @for (h of plan()!.highlights; track h) {
+    <ion-item>
+      <ion-label>{{ h }}</ion-label>
+    </ion-item>
+    }
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button (click)="goToSignUp()">Continuar para cadastro</ion-button>
+  </div>
+  }
+</ion-content>
