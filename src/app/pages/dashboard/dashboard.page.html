@@ -5,6 +5,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  @if (authService.isConsumer()) {
+    <app-consumer-dashboard></app-consumer-dashboard>
+  } @else if (authService.isSupplier()) {
+    <app-supplier-dashboard></app-supplier-dashboard>
+  } @else {
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ greeting() }}</ion-card-title>
@@ -16,4 +21,5 @@
       <ion-button (click)="logout()" expand="block" color="medium">Sair</ion-button>
     </ion-card-content>
   </ion-card>
+  }
 </ion-content>

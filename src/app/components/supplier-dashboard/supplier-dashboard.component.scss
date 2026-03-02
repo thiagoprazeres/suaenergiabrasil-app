@@ -1,0 +1,165 @@
+.system-status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  text-align: center;
+  
+  .status-item {
+    h4 {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+    }
+    
+    p {
+      margin: 0.25rem 0 0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      
+      &.capacity {
+        color: var(--ion-color-primary);
+      }
+      
+      &.current-output {
+        color: var(--ion-color-success);
+      }
+      
+      &.efficiency {
+        color: var(--ion-color-warning);
+      }
+      
+      &.uptime {
+        color: var(--ion-color-tertiary);
+      }
+    }
+  }
+}
+
+.performance-metrics,
+.revenue-analytics {
+  .metric-item,
+  .revenue-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    
+    .metric-label,
+    .revenue-label {
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+    }
+    
+    .metric-value,
+    .revenue-value {
+      font-weight: bold;
+      color: var(--ion-color-dark);
+    }
+    
+    &.growth .revenue-value {
+      color: var(--ion-color-success);
+    }
+  }
+}
+
+.production-chart,
+.forecast-chart {
+  .production-item,
+  .forecast-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    
+    .month {
+      flex: 0 0 80px;
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+    }
+    
+    .production-bars,
+    .forecast-bars {
+      flex: 1;
+      height: 16px;
+      background-color: var(--ion-color-light);
+      border-radius: 8px;
+      margin: 0 1rem;
+      overflow: hidden;
+      position: relative;
+      
+      .bar {
+        height: 100%;
+        border-radius: 8px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        &.produced {
+          background-color: var(--ion-color-primary);
+          opacity: 0.7;
+        }
+        
+        &.sold {
+          background-color: var(--ion-color-success);
+          z-index: 1;
+        }
+        
+        &.demand {
+          background-color: var(--ion-color-warning);
+          opacity: 0.7;
+        }
+        
+        &.supply {
+          background-color: var(--ion-color-tertiary);
+          z-index: 1;
+        }
+      }
+    }
+    
+    .production-values,
+    .forecast-revenue {
+      flex: 0 0 100px;
+      text-align: right;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      
+      &.produced {
+        background-color: var(--ion-color-primary);
+        opacity: 0.7;
+      }
+      
+      &.sold {
+        background-color: var(--ion-color-success);
+      }
+      
+      &.demand {
+        background-color: var(--ion-color-warning);
+        opacity: 0.7;
+      }
+      
+      &.supply {
+        background-color: var(--ion-color-tertiary);
+      }
+    }
+  }
+}

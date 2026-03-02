@@ -1,0 +1,252 @@
+@if (viewModel(); as data) {
+<ion-grid>
+  <!-- Status do Sistema -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="batteryChargingOutline"></ion-icon>
+            Status do Sistema
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="system-status">
+            <div class="status-item">
+              <h4>Capacidade Total</h4>
+              <p class="capacity">{{ data.systemStatus.totalCapacity }} kW</p>
+            </div>
+            <div class="status-item">
+              <h4>Saída Atual</h4>
+              <p class="current-output">{{ data.systemStatus.currentOutput }} kW</p>
+            </div>
+            <div class="status-item">
+              <h4>Eficiência</h4>
+              <p class="efficiency">{{ data.systemStatus.efficiency }}%</p>
+            </div>
+            <div class="status-item">
+              <h4>Uptime</h4>
+              <p class="uptime">{{ data.systemStatus.uptime }}%</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Métricas de Desempenho -->
+  <ion-row>
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="statsChartOutline"></ion-icon>
+            Métricas de Desempenho
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="performance-metrics">
+            <div class="metric-item">
+              <span class="metric-label">Utilização da Capacidade</span>
+              <span class="metric-value">{{ data.performanceMetrics.capacityUtilization }}%</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Preço Médio/kWh</span>
+              <span class="metric-value">R$ {{ data.performanceMetrics.averagePrice.toFixed(2).replace('.', ',') }}</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Taxa de Retenção</span>
+              <span class="metric-value">{{ data.performanceMetrics.clientRetentionRate }}%</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Crescimento Mensal</span>
+              <span class="metric-value">{{ data.performanceMetrics.monthlyGrowth }}%</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Eficiência do Sistema</span>
+              <span class="metric-value">{{ data.performanceMetrics.systemEfficiency }}%</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <!-- Análise de Receita -->
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="cashOutline"></ion-icon>
+            Análise de Receita
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="revenue-analytics">
+            <div class="revenue-item">
+              <span class="revenue-label">Mês Atual</span>
+              <span class="revenue-value">R$ {{ data.revenueAnalytics.currentMonth.toLocaleString('pt-BR') }}</span>
+            </div>
+            <div class="revenue-item">
+              <span class="revenue-label">Mês Anterior</span>
+              <span class="revenue-value">R$ {{ data.revenueAnalytics.previousMonth.toLocaleString('pt-BR') }}</span>
+            </div>
+            <div class="revenue-item">
+              <span class="revenue-label">Ano até o momento</span>
+              <span class="revenue-value">R$ {{ data.revenueAnalytics.yearToDate.toLocaleString('pt-BR') }}</span>
+            </div>
+            <div class="revenue-item">
+              <span class="revenue-label">Projeção Anual</span>
+              <span class="revenue-value">R$ {{ data.revenueAnalytics.projectedAnnual.toLocaleString('pt-BR') }}</span>
+            </div>
+            <div class="revenue-item growth">
+              <span class="revenue-label">Taxa de Crescimento</span>
+              <span class="revenue-value">+{{ data.revenueAnalytics.growthRate }}%</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Histórico de Produção -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trendingUpOutline"></ion-icon>
+            Histórico de Produção
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="production-chart">
+            @for (item of data.productionHistory; track item.month) {
+            <div class="production-item">
+              <span class="month">{{ item.month }}</span>
+              <div class="production-bars">
+                <div class="bar produced" [style.width.%]="(item.produced / 1100) * 100"></div>
+                <div class="bar sold" [style.width.%]="(item.sold / 1100) * 100"></div>
+              </div>
+              <span class="production-values">
+                {{ item.sold }}/{{ item.produced }} kWh
+              </span>
+            </div>
+            }
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color produced"></div>
+              <span>Produzido</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color sold"></div>
+              <span>Vendido</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Alertas de Manutenção e Clientes -->
+  <ion-row>
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="constructOutline"></ion-icon>
+            Alertas de Manutenção
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            @for (alert of data.maintenanceAlerts.slice(0, 3); track alert.id) {
+            <ion-item>
+              <ion-label>
+                <h3>{{ alert.title }}</h3>
+                <p>{{ alert.description }}</p>
+                <p>Custo estimado: R$ {{ alert.estimatedCost.toFixed(2).replace('.', ',') }}</p>
+              </ion-label>
+              <div slot="end">
+                <ion-badge [color]="alert.priority === 'high' ? 'danger' : alert.priority === 'medium' ? 'warning' : 'medium'">
+                  {{ alert.priority === 'high' ? 'Alta' : alert.priority === 'medium' ? 'Média' : 'Baixa' }}
+                </ion-badge>
+              </div>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="peopleOutline"></ion-icon>
+            Clientes Recentes
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            @for (client of data.clients.slice(0, 3); track client.id) {
+            <ion-item>
+              <ion-label>
+                <h3>{{ client.name }}</h3>
+                <p>{{ client.consumption }} kWh/mês</p>
+                <p>R$ {{ client.monthlyRevenue.toFixed(2).replace('.', ',') }}/mês</p>
+              </ion-label>
+              <div slot="end">
+                <ion-badge [color]="client.status === 'active' ? 'success' : client.status === 'suspended' ? 'warning' : 'medium'">
+                  {{ client.status === 'active' ? 'Ativo' : client.status === 'suspended' ? 'Suspenso' : 'Inativo' }}
+                </ion-badge>
+              </div>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Previsão de Energia -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trendingUpOutline"></ion-icon>
+            Previsão de Energia e Receita
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="forecast-chart">
+            @for (item of data.energyForecast; track item.month) {
+            <div class="forecast-item">
+              <span class="month">{{ item.month }}</span>
+              <div class="forecast-bars">
+                <div class="bar demand" [style.width.%]="(item.projectedDemand / 1200) * 100"></div>
+                <div class="bar supply" [style.width.%]="(item.projectedSupply / 1200) * 100"></div>
+              </div>
+              <span class="forecast-revenue">
+                R$ {{ item.projectedRevenue.toLocaleString('pt-BR') }}
+              </span>
+            </div>
+            }
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color demand"></div>
+              <span>Demanda</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color supply"></div>
+              <span>Oferta</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+}

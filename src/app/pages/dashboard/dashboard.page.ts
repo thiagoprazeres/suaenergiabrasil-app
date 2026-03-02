@@ -12,6 +12,8 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../core/services/auth.service';
+import { ConsumerDashboardComponent } from '../../components/consumer-dashboard/consumer-dashboard.component';
+import { SupplierDashboardComponent } from '../../components/supplier-dashboard/supplier-dashboard.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +22,8 @@ import { AuthService } from '../../core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
+    ConsumerDashboardComponent,
+    SupplierDashboardComponent,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -32,7 +36,7 @@ import { AuthService } from '../../core/services/auth.service';
   ],
 })
 export class DashboardPage {
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   readonly user = this.authService.user;

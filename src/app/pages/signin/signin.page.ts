@@ -9,15 +9,17 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonSelect,
+  IonSelectOption,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
+  selector: 'app-signin',
+  templateUrl: './signin.page.html',
+  styleUrls: ['./signin.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
@@ -29,26 +31,29 @@ import { AuthService } from '../../core/services/auth.service';
     IonItem,
     IonLabel,
     IonInput,
+    IonSelect,
+    IonSelectOption,
     IonButton,
   ],
 })
-export class SignUpPage {
+export class SignInPage {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   readonly submitted = signal(false);
+  readonly userType = signal<'consumer' | 'supplier'>('consumer');
 
   readonly form = this.fb.nonNullable.group({
-    name: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(2)]),
+    userType: this.fb.nonNullable.control<'consumer' | 'supplier'>('consumer'),
     email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
-    cpf: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\d{11}$/)]),
-    phone: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\d{10,11}$/)]),
+    password: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(6)]),
   });
 
   readonly isValid = computed(() => this.form.valid);
 
   submit(): void {
+    console.log(this.form.value);
     this.submitted.set(true);
 
     if (this.form.invalid) {
@@ -56,8 +61,19 @@ export class SignUpPage {
       return;
     }
 
-    const { name, email, cpf, phone } = this.form.getRawValue();
-    this.authService.mockConsumerSignUp(name, email, cpf, phone);
+    const { email, password } = this.form.getRawValue();
+    
+    // Mock login - em um app real, isso faria uma chamada API
+    if (this.userType() === 'consumer') {
+      this.authService.mockConsumerSignUp('João Silva', email, '12345678901', '11999999999');
+    } else {
+      this.authService.mockSupplierSignUp('Solar Energy Ltd', email, '12345678901234', 'Solar Energy Ltd', '11988888888');
+    }
+    
     void this.router.navigateByUrl('/dashboard');
+  }
+
+  goToSignup(): void {
+    void this.router.navigateByUrl('/signup');
   }
 }

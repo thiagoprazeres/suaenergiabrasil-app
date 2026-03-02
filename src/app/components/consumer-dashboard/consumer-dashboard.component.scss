@@ -1,0 +1,164 @@
+.plan-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .plan-info {
+    h3 {
+      margin: 0;
+      color: var(--ion-color-primary);
+    }
+    
+    p {
+      margin: 0.25rem 0 0;
+      color: var(--ion-color-success);
+      font-weight: 500;
+    }
+  }
+  
+  .plan-savings {
+    text-align: right;
+    
+    h4 {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+    }
+    
+    .savings-amount {
+      margin: 0.25rem 0 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--ion-color-success);
+    }
+  }
+}
+
+.next-bill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .bill-amount {
+    h3 {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+    }
+    
+    .amount {
+      margin: 0.25rem 0 0;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .bill-info {
+    text-align: right;
+    
+    p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.consumption-chart {
+  .consumption-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    
+    .month {
+      flex: 0 0 80px;
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+    }
+    
+    .consumption-bar {
+      flex: 1;
+      height: 8px;
+      background-color: var(--ion-color-light);
+      border-radius: 4px;
+      margin: 0 1rem;
+      overflow: hidden;
+      
+      .bar {
+        height: 100%;
+        background-color: var(--ion-color-primary);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+    }
+    
+    .consumption-value {
+      flex: 0 0 60px;
+      text-align: right;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.impact-stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  
+  .stat-item {
+    h4 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--ion-color-success);
+    }
+    
+    p {
+      margin: 0.25rem 0 0;
+      font-size: 0.8rem;
+      color: var(--ion-color-medium);
+    }
+  }
+}
+
+.potential-savings {
+  color: var(--ion-color-success) !important;
+  font-weight: 500;
+}
+
+.bill-status {
+  text-align: right;
+  
+  .amount {
+    display: block;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+  }
+  
+  .savings {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--ion-color-success);
+  }
+  
+  .status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    
+    &.paid {
+      color: var(--ion-color-success);
+    }
+    
+    &.pending {
+      color: var(--ion-color-warning);
+    }
+    
+    &.overdue {
+      color: var(--ion-color-danger);
+    }
+  }
+}

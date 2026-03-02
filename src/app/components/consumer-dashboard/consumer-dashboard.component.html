@@ -1,0 +1,173 @@
+@if (viewModel(); as data) {
+<ion-grid>
+  <!-- Resumo do Plano Atual -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Seu Plano Atual</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="plan-summary">
+            <div class="plan-info">
+              <h3>{{ data.currentPlan?.distributorName }}</h3>
+              <p>{{ data.currentPlan?.discountPercentage ?? 0 }}% de desconto</p>
+            </div>
+            <div class="plan-savings">
+              <h4>Economia mensal</h4>
+              <p class="savings-amount">R$ {{ (data.currentPlan?.monthlySavings ?? 0).toFixed(2).replace('.', ',') }}</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Próxima Fatura -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="wallet-outline"></ion-icon>
+            Próxima Fatura
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="next-bill">
+            <div class="bill-amount">
+              <h3>Valor estimado</h3>
+              <p class="amount">R$ {{ data.nextBill.estimatedAmount.toFixed(2).replace('.', ',') }}</p>
+            </div>
+            <div class="bill-info">
+              <p><strong>Economia estimada:</strong> R$ {{ data.nextBill.estimatedSavings.toFixed(2).replace('.', ',') }}</p>
+              <p><strong>Vencimento:</strong> {{ data.nextBill.dueDate | date:'dd/MM/yyyy' }}</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Histórico de Consumo -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trending-up-outline"></ion-icon>
+            Histórico de Consumo
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="consumption-chart">
+            @for (item of data.consumptionHistory; track item.month) {
+            <div class="consumption-item">
+              <span class="month">{{ item.month }}</span>
+              <div class="consumption-bar">
+                <div class="bar" [style.width.%]="(item.consumption / 500) * 100"></div>
+              </div>
+              <span class="consumption-value">{{ item.consumption }} kWh</span>
+            </div>
+            }
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Impacto Ambiental -->
+  <ion-row>
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="leaf-outline"></ion-icon>
+            Impacto Ambiental
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="impact-stats">
+            <div class="stat-item">
+              <h4>{{ data.sustainabilityImpact.co2Reduction }} kg</h4>
+              <p>Redução de CO₂/ano</p>
+            </div>
+            <div class="stat-item">
+              <h4>{{ data.sustainabilityImpact.treesEquivalent }}</h4>
+              <p>Árvores equivalentes</p>
+            </div>
+            <div class="stat-item">
+              <h4>{{ data.sustainabilityImpact.renewableEnergyPercentage }}%</h4>
+              <p>Energia renovável</p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <!-- Dicas de Economia -->
+    <ion-col size="12" size-md="6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="bulb-outline"></ion-icon>
+            Dicas de Economia
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            @for (tip of data.energyTips.slice(0, 3); track tip.id) {
+            <ion-item>
+              <ion-label>
+                <h3>{{ tip.title }}</h3>
+                <p>{{ tip.description }}</p>
+                <p class="potential-savings">Economia potencial: R$ {{ tip.potentialSavings.toFixed(2).replace('.', ',') }}</p>
+              </ion-label>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Histórico de Faturas -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="time-outline"></ion-icon>
+            Histórico de Faturas
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            @for (bill of data.billHistory; track bill.id) {
+            <ion-item>
+              <ion-label>
+                <h3>{{ bill.month }}</h3>
+                <p>{{ bill.distributorName }}</p>
+              </ion-label>
+              <div slot="end" class="bill-status">
+                <span class="amount">R$ {{ bill.amount.toFixed(2).replace('.', ',') }}</span>
+                <span class="savings">Economia: R$ {{ bill.savings.toFixed(2).replace('.', ',') }}</span>
+                <span class="status" [class]="bill.status">
+                  @if (bill.status === 'paid') {
+                    <ion-icon name="checkmark-circle-outline"></ion-icon> Paga
+                  } @else if (bill.status === 'pending') {
+                    <ion-icon name="time-outline"></ion-icon> Pendente
+                  } @else {
+                    <ion-icon name="alert-circle-outline"></ion-icon> Vencida
+                  }
+                </span>
+              </div>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+}

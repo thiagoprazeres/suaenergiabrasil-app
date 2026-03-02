@@ -60,6 +60,10 @@ export class OnboardingPage {
 
   readonly progress = computed(() => (this.activeIndex() + 1) / this.steps().length);
 
+  goToSignin(): void {
+    void this.router.navigateByUrl('/signin');
+  }
+
   goToSignup(): void {
     void this.router.navigateByUrl('/signup');
   }
