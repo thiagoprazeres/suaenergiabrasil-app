@@ -30,7 +30,6 @@ import {
 @Component({
   selector: 'app-supplier-dashboard',
   templateUrl: './supplier-dashboard.component.html',
-  styleUrls: ['./supplier-dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IonGrid,
